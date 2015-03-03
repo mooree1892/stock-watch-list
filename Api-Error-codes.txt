@@ -1,0 +1,10 @@
+Error Codes:
+
+API-001: No such ticker Id;
+API-002: Internal code error;
+API-003: Retrieval error;
+API-004: Bad user input;
+API-404: Undefined error;
+
+USER-001: Bad Password or User Name;
+USER-404: No user found;

@@ -15,7 +15,7 @@ StockRender.AppRender.register({
 	beforeRender: function () {
 		console.log('running beforeRender!');
 	},
-	ready: function(AppMemory, AppData, appIns) {
+	ready: function(AppMemory, AppData) {
 		/*Defining Variables*/
 		var last_input;
 
@@ -27,6 +27,13 @@ StockRender.AppRender.register({
 					last_input = 'A';
 				} else {
 					last_input = data;
+				}
+			})
+			.error(function(err, data){
+				if(err) {
+					console.log('AppMemory not retrieved',data);
+					AppMemory.write('last_input','A');
+					last_input = 'A';
 				}
 			});
 

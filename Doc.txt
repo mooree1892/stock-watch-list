@@ -1,0 +1,43 @@
+Doc
+----------------------------------------------------------------------------
+
+StockRender.AppRender.register(obj) :: Registers you application with the framework
+
+obj = 	
+	id: String || Number,
+	name: String,
+	version: String || Number,
+	defaults: {
+		terminal: {
+			x: Number,
+			y: Number,
+			w: Number,
+			h: Number
+		}
+	},
+	beforeRender: function () {},
+	ready: function(AppMemory, AppData, appIns) {}
+
+----------------------------------------------------------------------------
+AppMemory ::  Module that handles User Data and instance memory
+
+	[1] AppMemory.read(request_value) :: Reads a property of the current user for this application.
+		
+		returns
+			{success(data),error(err, data)}
+
+----------------------------------------------------------------------------
+
+AppData :: Module that handles various stock data
+	
+	[1] AppData.v1.fundamental.GET(stockId, fundamentals_type) :: handler for financial historical value of the stock
+
+		returns
+			{Promise}
+
+	[2] AppData.v1.pricedata.GET(stockId) :: handler for historical price-data of a stock
+
+		returns
+			{Promise}
+
+
