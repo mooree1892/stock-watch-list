@@ -1,0 +1,19 @@
+//-----------------------------------------
+//	These are some important changes!
+//-----------------------------------------
+
+//-----------------------------------------
+//	AppData
+//-----------------------------------------
+APIHandler.Requests: disabled user header and app version header, as no implementation of such things exists yet.
+
+//-----------------------------------------
+//	AppMemory
+//-----------------------------------------
+AppMemory .read && .write: disabled user header and app version header, as no implementation of such things exists yet.
+
+//-----------------------------------------
+//	AppRender
+//-----------------------------------------
+AppRender.register: switched memory.onReady(app.ready); to app.ready();
+AppRender.ready: is a function on AppMemory and AppData <- this works a bit better, eliminates some flow issues with events.

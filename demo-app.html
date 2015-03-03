@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="http://www.promisejs.org/polyfills/promise-6.1.0.min.js"></script>
+		<script src="stock-render.js"></script>
+		<script src="app-memory.js"></script>
+		<script src="app-data.js"></script>
+		<script src="app-render.js"></script>
+	</head>
+	<body>
+		<script>
+			StockRender.AppRender.register({
+				id: "49e90eee6ce1942a94136fc8db19319c",
+				name: "Something",
+				version: "1.0.0",
+				defaults: {
+					terminal: {
+						x: 0,
+						y: 0,
+						w: 100,
+						h: 100
+					}
+				},
+
+				beforeRender: function(){
+					console.log("This is before the appMemory has returned", this.name, this.version);
+				},
+
+				ready: function(){
+					this.customFunc1();
+				},
+
+				prop1: "foo",
+				prop2: "bar",
+
+				customFunc1: function(){
+					console.log("customFunc1 is now running! Let's read and write some stuff");
+					console.log("Oh by the way, our properties are:", this.prop1, this.prop2);
+
+					this.AppMemory.read("something.someproperty");
+					this.AppMemory.write("something.someproperty", 10);
+
+					//-----------------------------------------
+					// /v1/tests
+					//-----------------------------------------
+					this.AppData.v1.Tests.GET().then( function(){
+						console.log("Tests has returned!");
+
+					}, function(jqXHR){
+
+						console.log("Tests has errored!", jqXHR);
+					});
+
+					//-----------------------------------------
+					// /v1/tests/mongo
+					//-----------------------------------------
+					this.AppData.v1.Tests.Mongo.GET().then( function(){
+						console.log("Mongo has returned!");
+
+					}, function(jqXHR){
+
+						console.log("Mongo has errored!", jqXHR);
+					});
+
+					//-----------------------------------------
+					// /v1/tests/mongo/someUserID
+					//-----------------------------------------
+					this.AppData.v1.Tests.Mongo.User.GET("someUserID").then( function(){
+						console.log("GET Mongo User has returned!");
+
+					}, function(jqXHR){
+
+						console.log("GET Mongo user has errored!", jqXHR);
+					});
+
+					//-----------------------------------------
+					// POST IT?
+					//-----------------------------------------
+					this.AppData.v1.Tests.Mongo.User.POST("someUserID").then( function(){
+						console.log("POST Mongo User has returned!");
+
+					}, function(jqXHR){
+
+						console.log("POST Mongo user has errored!", jqXHR);
+					});
+				}
+			});
+
+			//-----------------------------------------
+			// Run in console to find app by ID
+			//-----------------------------------------
+			// StockRender.AppRender.appByID('49e90eee6ce1942a94136fc8db19319c');
+		</script>
+	</body>
+</html>
