@@ -9,34 +9,33 @@
 
 		<!-- Supplementary Code -->
 		<!-- JS -->
-			<script src="js/Runner.js"></script>
 			<script src="js/main.js"></script>
 		<!-- JS -->
 		<!-- CSS -->
-			<link rel="stylesheet" type="text/css" href="css/loading-anim.css">
 			<link rel="stylesheet" type="text/css" href="css/main.css">
 		<!-- CSS -->
 		<!-- Supplementary Code -->
 	</head>
 	<body>
-		<div class="overhead">
-			<div class="spinner"></div>
-			<span> Loading...</span>
+		<div style="float: left;">
+			<h1>Apple Eps-Base</h1>
+			<pre class="data-list datasets"></pre>
 		</div>
-
-		<div class="main">
-			Stock Ticker: <input type="text" id="stock" value="A"><input type="submit" value="Submit" id="ticker-btn">
+		<div style="float: left;">
+			<h1>Id List (json)</h1>
+			<pre class="data-list idlist"></pre>
 		</div>
-
-		<div class="tables">
-			<div id="fundamental-data" class="list">
-				<h1>Earning per Share</h1>
-				<ul></ul>
-			</div>
-			<div id="price-data" class="list">
-				<h1>Price Data</h1>
-				<ul></ul>
-			</div>
+		<div style="float: left;">
+			<h1>Ticker List (Array)</h1>
+			<pre class="data-list tickerlist"></pre>
+		</div>
+		<div style="float: left;">
+			<h1>Error type 1</h1>
+			<pre class="data-list errorData-1"></pre>
+		</div>
+		<div style="float: left;">
+			<h1>Error type 2</h1>
+			<pre class="data-list errorData-2"></pre>
 		</div>
 	</body>
 </html>
