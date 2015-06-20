@@ -25,18 +25,3 @@ SR.AppData.v1.Tickerlist.GET('array').then(function (data) {
 	alert("Opps I failed...");
 	console.log(error);
 });
-/*Errors*/
-/*1*/
-SR.AppData.v1.direct.GET('AAPL','data').then(function (data) {
-	alert("Opps I didn't fail...");
-}, function (error) {
-	dt.fail["1"] = error;
-	$('.errorData-1').html(JSON.stringify(dt.fail["1"],undefined, 2	));
-});
-/*2*/
-SR.AppData.v1.direct.GET('AAPL','pricedata').then(function (data) {
-	alert("Opps I didn't fail...");
-}, function (error) {
-	dt.fail["2"] = error;
-	$('.errorData-2').html(JSON.stringify(dt.fail["2"],undefined, 2	));
-});

@@ -10,32 +10,58 @@
 		<!-- Supplementary Code -->
 		<!-- JS -->
 			<script src="js/main.js"></script>
+			<script src="js/watch-list-runner.js"></script>
+			<script src="js/show-hide-settings.js"></script>
+			<script src="js/settings.js"></script>
 		<!-- JS -->
 		<!-- CSS -->
 			<link rel="stylesheet" type="text/css" href="css/main.css">
 		<!-- CSS -->
+
+		<!-- JS Table Functionality -->
+			<script src="js/enter-stock.js"></script>
+			<script src="js/remove.js"></script>
+			<!-- JS Table Functionality -->
+
 		<!-- Supplementary Code -->
+		<h1><b><font color="Gray">StockRender WatchList</font></b></h1>
 	</head>
 	<body>
-		<div style="float: left;">
-			<h1>Apple Eps-Base</h1>
-			<pre class="data-list datasets"></pre>
-		</div>
-		<div style="float: left;">
-			<h1>Id List (json)</h1>
-			<pre class="data-list idlist"></pre>
-		</div>
-		<div style="float: left;">
-			<h1>Ticker List (Array)</h1>
-			<pre class="data-list tickerlist"></pre>
-		</div>
-		<div style="float: left;">
-			<h1>Error type 1</h1>
-			<pre class="data-list errorData-1"></pre>
-		</div>
-		<div style="float: left;">
-			<h1>Error type 2</h1>
-			<pre class="data-list errorData-2"></pre>
-		</div>
+		<div id="settings" title="Settings">
+		<span class="ion-gear-b" data-pack="default" onClick = "toggle2();"></span>
+		<script>  $("#settings").hide(); </script>
+    	<label id = "lblText">Text Size: </label>
+    	<label id = "lblColor">Color Scheme: </label>
+    	<label id = "lblTextColor">Text Color: </label>
+    	<input id = "inpTextColor" class="color" value="000000"></input>
+    	<input id = "inpColorScheme1" class="color" value="A8C6FA"></input>
+    	<input id = "inpColorScheme2" class="color" value="FFFFFF"></input>
+    	<input id = "inpText" type="number" min="5" max="30" step="1" value="16">
+	</div>
+
+	<!-- Make Table -->
+	<table height = "10" width = "300" cellspacing="0" border="0" cellpadding="0" id="table1" class="table1">
+    <col width="31%">
+    <col width="31%">
+    <col width="31%">
+    <col width="7%">
+    <tr bgcolor= "#D3D3D3">
+        <th colspan="4"> 
+				<p>
+					Stock Watchlist	
+					<span class="ion-gear-b" data-pack="default" onClick = "toggle1();"></span>
+				</p></th>
+    </tr>
+    <tr>
+        <td><p>Stock</p></td>
+        <td><p>Price</p></td>
+        <td colspan="2">% Change</td>
+    </tr>
+    <tr>
+		<!-- Input box for user input -->
+        <th colspan="4"><p id="enterStock"><input id="autocomplete" type="textbox" name="currency"><span class="stock">Click to enter stock ticker</span></input></p></th>
+			<script> document.getElementById("autocomplete").style.display = "none"; </script></th>
+    </tr>
+	</table>
 	</body>
 </html>
