@@ -1,2 +1,2 @@
-# Stockrender-Table application
-The official Stockrender Table appliaction
+# Stockrender-List application
+The official Stockrender Watch List appliaction
