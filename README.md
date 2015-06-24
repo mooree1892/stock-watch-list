@@ -1,2 +1,2 @@
-# Stockrender-Template-Client-side-app
-A template for Stockrender-client-side applications
+# Stockrender-Table application
+The official Stockrender Table appliaction

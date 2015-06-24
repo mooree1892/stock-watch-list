@@ -1,0 +1,17 @@
+{
+  "name": "SR.Table.App",
+  "main": "server.js",
+  "version": "0.0.0",
+  "description": "Stockrender table app",
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "express": "^4.1.1",
+    "morgan": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}

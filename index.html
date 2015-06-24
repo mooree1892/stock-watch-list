@@ -1,67 +1,83 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Stockrender-Template App</title>
-
-		<!-- Framework -->
-		<script src="vendors/stockrender-apprender.1.0.0.min.js"></script>
-		<!-- Framework -->
-
-		<!-- Supplementary Code -->
-		<!-- JS -->
-			<script src="js/main.js"></script>
-			<script src="js/watch-list-runner.js"></script>
-			<script src="js/show-hide-settings.js"></script>
-			<script src="js/settings.js"></script>
-		<!-- JS -->
+		<title>Stockrender-Table App</title>
 		<!-- CSS -->
-			<link rel="stylesheet" type="text/css" href="css/main.css">
+			<!-- Bower -->
+				<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+			<!-- Bower -->
+			<!-- Supplementary Code -->
+				<link rel="stylesheet" type="text/css" href="css/loading-anim.css">
+				<link rel="stylesheet" type="text/css" href="css/dropdown.css">
+				<link rel="stylesheet" type="text/css" href="css/main.css">
+			<!-- Supplementary Code -->
 		<!-- CSS -->
-
-		<!-- JS Table Functionality -->
-			<script src="js/enter-stock.js"></script>
-			<script src="js/remove.js"></script>
-			<!-- JS Table Functionality -->
-
-		<!-- Supplementary Code -->
-		<h1><b><font color="Gray">StockRender WatchList</font></b></h1>
+		<!-- JS -->
+			<!-- Vendors -->
+				<!-- Framework -->
+					<script src="vendors/stockrender/apprender.launch.js"></script>
+				<!-- Framework -->
+				<!-- Bower -->
+					<script src="bower_components/numeraljs/numeral.js"></script>
+					<script src="bower_components/async/lib/async.js"></script>
+					<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+					<script src="bower_components/tablesorter/jquery.metadata.js"></script>
+					<script src="bower_components/tablesorter/jquery.tablesorter.min.js"></script>
+					<script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+				<!-- Bower -->
+			<!-- Vendors -->
+			<!-- Supplementary Code -->
+					<script src="js/table.js"></script>
+					<script src="js/memory.js"></script>
+					<script src="js/typeahead.js"></script>
+					<script src="js/datasets.js"></script>
+					<script src="js/alerts.js"></script>
+					<script src="js/main.js"></script>
+			<!-- Supplementary Code -->
+		<!-- JS -->
 	</head>
 	<body>
-		<div id="settings" title="Settings">
-		<span class="ion-gear-b" data-pack="default" onClick = "toggle2();"></span>
-		<script>  $("#settings").hide(); </script>
-    	<label id = "lblText">Text Size: </label>
-    	<label id = "lblColor">Color Scheme: </label>
-    	<label id = "lblTextColor">Text Color: </label>
-    	<input id = "inpTextColor" class="color" value="000000"></input>
-    	<input id = "inpColorScheme1" class="color" value="A8C6FA"></input>
-    	<input id = "inpColorScheme2" class="color" value="FFFFFF"></input>
-    	<input id = "inpText" type="number" min="5" max="30" step="1" value="16">
-	</div>
-
-	<!-- Make Table -->
-	<table height = "10" width = "300" cellspacing="0" border="0" cellpadding="0" id="table1" class="table1">
-    <col width="31%">
-    <col width="31%">
-    <col width="31%">
-    <col width="7%">
-    <tr bgcolor= "#D3D3D3">
-        <th colspan="4"> 
-				<p>
-					Stock Watchlist	
-					<span class="ion-gear-b" data-pack="default" onClick = "toggle1();"></span>
-				</p></th>
-    </tr>
-    <tr>
-        <td><p>Stock</p></td>
-        <td><p>Price</p></td>
-        <td colspan="2">% Change</td>
-    </tr>
-    <tr>
-		<!-- Input box for user input -->
-        <th colspan="4"><p id="enterStock"><input id="autocomplete" type="textbox" name="currency"><span class="stock">Click to enter stock ticker</span></input></p></th>
-			<script> document.getElementById("autocomplete").style.display = "none"; </script></th>
-    </tr>
-	</table>
+		<div class="overhead loading">
+			<div class="spinner"></div>
+			<span> Loading...</span>
+		</div>
+		<div class="container">
+			<div class="row desk">
+				<div class="input-group col-sm-6 col-md-6 col-lg-6">
+					<input class="form-control" id="ticker" placeholder="Ticker/Stock Name" type="text">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<span id="sel-dataset">Dataset</span> <span class="caret"></span>
+							<span class="sr-only">Dataset</span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu" id="datasets">
+						</ul>
+						<button type="button" class="btn btn-default" id="addToTable"><i class="glyphicon glyphicon-plus"></i></button>
+					</div>
+				</div>
+				<div class="input-group col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 col-lg-2 col-lg-offset-4">
+					<div class="alert alert-success" role="alert">
+						<a href="#" class="alert-link">Added Successfully!</a>
+					</div>
+					<div class="alert alert-danger" role="alert">
+						<a href="#" class="alert-link">Failed to retrieve.</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<table class="table table-hover table-striped">
+					<thead> 
+						<tr>
+							<th>Company Name</th>
+							<th>Price</th>
+							<th>% Change</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody> 
+				</table>
+			</div>
+		</div>
 	</body>
 </html>

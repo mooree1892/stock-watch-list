@@ -1,9 +1,17 @@
 {
-  "name": "stock-watch-list",
-  "version": "0.0.0",
-  "homepage": "https://github.com/mooree1892/stock-watch-list",
+  "name": "Stockrender-Table-App",
+  "version": "0.0.1",
+  "homepage": "https://github.com/asosnovsky/stockrender-table-app",
   "authors": [
-    "mooree1892 <mooree1892@users.noreply.github.com>"
+    "asosnovsky <arielsosnovsky@gmail.com>",
+    "Marcin Zegarmistrz",
+    "Richard Ren",
+    "Luke Caccamo"
+  ],
+  "description": "Stockrender table application",
+  "main": "index.html",
+  "keywords": [
+    "stockrender"
   ],
   "license": "MIT",
   "ignore": [
@@ -14,6 +22,11 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5"
+    "async": "~1.2.1",
+    "numeraljs": "~1.5.3",
+    "bootstrap": "~3.3.4",
+    "tablesorter": "*",
+    "bootstrap-tagautocomplete": "*",
+    "typeahead.js": "~0.11.1"
   }
 }

@@ -1,0 +1,6 @@
+bower_components
+node_modules
+.floo
+.flooignore
+*.swp
+npm-debug.log
