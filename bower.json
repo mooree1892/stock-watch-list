@@ -1,12 +1,11 @@
 {
-  "name": "Stockrender-Table-App",
+  "name": "Stockrender-Watch-List-App",
   "version": "0.0.1",
   "homepage": "https://github.com/asosnovsky/stockrender-table-app",
   "authors": [
-    "asosnovsky <arielsosnovsky@gmail.com>",
-    "Marcin Zegarmistrz",
-    "Richard Ren",
-    "Luke Caccamo"
+    "mooree1892 <edwardmoore@live.ca>",
+    "RenzoNicolas",
+    "Gravitycat1",
   ],
   "description": "Stockrender table application",
   "main": "index.html",

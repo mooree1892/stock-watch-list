@@ -1,16 +1,28 @@
+/**
+ * Fail msg
+ * @param {String} msg 
+ * @param {Number} tmo 
+ */
 function FAIL (msg, tmo) {
-	tmo = 5000 || tmo;
-	$('.alert-danger').show();
-	$('.alert-danger .alert-link').html(msg||$('.alert-danger .alert-link').html());
+	tmo = tmo || 3000;
+	// $('.alert-danger').show();
+	$('.alert-danger').css({"opacity":1});
+	$('.alert-danger .alert-link').html(msg||'<i class="glyphicon glyphicon-flag"></i> Failed to Retrieve.');
 	setTimeout(function () {
-		$('.alert-danger').hide();
+		$('.alert-danger').css({"opacity":0});
 	}, tmo);
 }
+/**
+ * Success msg
+ * @param {String} msg 
+ * @param {Number} tmo 
+ */
 function SUCS (msg, tmo) {
-	tmo = 5000 || tmo;
-	$('.alert-success').show();
-	$('.alert-success .alert-link').html(msg||$('.alert-success .alert-link').html());
+	tmo = tmo || 3000;
+	// $('.alert-success').show();
+	$('.alert-success').css({"opacity":1});
+	$('.alert-success .alert-link').html(msg||'<i class="glyphicon glyphicon-check"></i> Added Successfully!');
 	setTimeout(function () {
-		$('.alert-success').hide();
+		$('.alert-success').css({"opacity":0});
 	}, tmo);
 }

@@ -6,16 +6,7 @@ function loadTable () {
 	appmemory.load('list').then(function(list){
 		async.map(list, function (item) {
 			$('table')[0].list = list;
-			loadData(item.split('/')[0], 
-				item.split('/')[1]
-			).then(function(data){
-				createRow(
-					lists.ticker[item.split('/')[0]], 
-					lists.id[item.split('/')[1]],
-					data,
-					item
-				);
-			});
+			addToTable(item);
 		});;
 	});
 }
@@ -24,19 +15,40 @@ function loadTable () {
  * @param {String} item 
  */
 function addToTable (item) {
-	addToList(item).then(function () {
-		loadData(item.split('/')[0], 
-			item.split('/')[1]
+	// addToList(item).then(function () {
+		loadData(item
 		).then(function(data){
-			createRow(
-				lists.ticker[item.split('/')[0]], 
-				lists.id[item.split('/')[1]],
-				data,
-				item
-			);
-			SUCS();
-		});
-	})
+			if(data) {
+				createRow(
+						[
+							{
+								name 	: '<i class="glyphicon glyphicon-remove"></i> ' + lists.ticker[item].name,
+								onclick	:  function () {
+									removeRow(this.parentElement);
+								},
+								tooltip	: lists.ticker[item].description,
+								class	: 'companyname-tb'
+							},
+							{
+								name 	: numeral(data[0]).format('($0,0.00)'),
+								onclick	: false,
+								tooltip	: lists.ticker[item].description,
+								class	: 'number-tb'
+							},
+							// {
+							// 	name 	: numeral(data).format('0,0.00%'),
+							// 	onclick	: false,
+							// 	tooltip	: lists.ticker[item].description,
+							// 	class	: 'change-tb'
+							// }
+						],
+						item
+					);
+			}	else	{
+				FAIL('data for ' + item + ' came back empty');
+			}
+		}, FAIL);
+	// })
 }
 /**
  * Create a row item
@@ -45,19 +57,22 @@ function addToTable (item) {
  * @param  {String/Number} val
  * @return {HTML}      
  */
-function createRow(tickData, idData, val, item){
+function createRow(vals, item){
 	var tr = $('<tr></tr>');
-	var td = $('<td><i class="glyphicon glyphicon-remove"></i> ' + tickData.name + '</td>');
-		td[0].children[0].onclick = function () {
-			removeRow(this.parentElement.parentElement);
+	vals.forEach(function(val){
+		if(tsettings.getAttr(val.class.split('-')[0])) {
+			var td = document.createElement('td');
+				td.innerHTML = val.name;
+				td.className = val.class;
+				(val.tooltip)&&(td.title = val.tooltip);
+				td.onclick	 = val.onclick;
+				tr[0].appendChild(td);
 		};
-		tr[0].appendChild(td[0]);
-		tr[0].appendChild($('<td>' + numeral(val).format('($0,0.00a)') + '</td>')[0]);
-		tr[0].appendChild($('<td>' + tickData.change + '</td>')[0]);
-		// tr[0].appendChild()
-		tr[0].item = item;
+	});
+	tr[0].item = item;
 	$('tbody').append(tr);
 	$('table').tablesorter({sortList: [[0,0], [1,0]]});
+	SUCS();
 }
 
 /**

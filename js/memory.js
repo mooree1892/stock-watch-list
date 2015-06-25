@@ -1,25 +1,28 @@
 'use strict';
-
-var currentPrice; //Will contain the stock's price value today.
-var yesterdayPrice; //Will contain the stock's price value yesterday.
-var priceChange; //Will contain the percent change of the price value compared to today and yesterday.
-var temp;
+/*Variables*/
+var appmemory = new SR.AppMemory(SR.AppID, SR.UserID),
+	lists = {
+		ticker: {},
+		ticks: {}
+	};
 
 /*Initiate AppMemory*/
-var appmemory = new SR.AppMemory(SR.AppID, SR.UserID);
-	appmemory.save('list',[
-		'AAPL/assets',
-		'GOOG/netincome',
-		]).then(function () {});
-/*Variables*/
-var lists = {
-	dt: {},
-	id: {},
-	ticker: {},
-	ticks: {},
-	types: {},
-	price: []
-}
+appmemory.save('list',[
+	'AAPL',
+	'ARI',
+	'Z',
+	'GOOG',
+	'AA',
+	'A',
+	'TSLA'
+	]).then(function () {});
+
+appmemory.save('settings',{
+	'companyname': true,
+	'number'	 : true,
+	'change'	 : true
+}).then(function () {});
+
 /**
  * Add values to the memo-list
  * @param {String} item 
@@ -34,29 +37,22 @@ function addToList (item) {
  * @param  {String} type   
  * @return {Promise}        
  */
-function loadData(ticker, type) {
+function loadData(ticker) {
 	return new Promise(function (res, rej) {
-		if($.inArray(type, lists.price)){
-			type = 'pricedata';
-		}
-		SR.AppData.v1.direct.GET(ticker, type, {from:"2013-01-01"}).then(function(data){
-			res(((data&&data.response&&data.response.data.length > 0)?data.response.data[0][1]:'NA'));
-
-			currentPrice = data.response.data.slice(0,1)[0][1];
-			yesterdayPrice = data.response.data.slice(1,2)[0][1];
-		
-			temp = ((currentPrice - yesterdayPrice)/ currentPrice) * 100;
-			priceChange = Math.round(temp * 100) / 100
-
-			// //Check if data is retrieved.
-			// console.log("Stock Ticker (Undefined means default company A is used.): " + stockName);
-			// console.log("Current Price Value: " + currentPrice);
-			// console.log("Yesterday's Price Value: " + yesterdayPrice);
-			// console.log("Change in Price: " + priceChange + "%");
-
+		SR.AppData.v1.direct.GET(ticker, 'pricedata', {from:"2013-01-01"}).then(function(data){
+			//console.log(data);
+			return (data&&data.response&&data.response.data.length > 0)?[data.response.data[0][1],data.response.data[1][1]]:false;
 		}, function (reason) {
-			FAIL();
-			rej('NA');
-		})	
+			console.warn((reason[0].responseJSON)?reason[0].responseJSON.error:[ticker, type , reason]);	
+			rej('Failed getting ' + ticker + '/pricedata due to `' + reason[1] + '`');
+		}).then(function(price){
+			if(price){
+				// console.log(price[0])
+				// console.log(price[1])
+				console.log(price[0]-price[1]);
+				res((price[0]-price[1])/price[1]);
+			}
+		})
+		
 	})
 }
