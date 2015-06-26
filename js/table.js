@@ -30,20 +30,23 @@ function addToTable (item) {
 								class	: 'companyname-tb'
 							},
 							{
-								name 	: numeral(data[0]).format('($0,0.00)'),
+								name 	: numeral(data).format('($0,0.00)'),
 								onclick	: false,
 								tooltip	: lists.ticker[item].description,
 								class	: 'number-tb'
+								
 							},
-							// {
-							// 	name 	: numeral(data).format('0,0.00%'),
-							// 	onclick	: false,
-							// 	tooltip	: lists.ticker[item].description,
-							// 	class	: 'change-tb'
-							// }
+							{
+								name 	: numeral(data).format('0,0.00%'),
+								onclick	: false,
+								tooltip	: lists.ticker[item].description,
+								class	: 'change-tb'
+								
+							}
 						],
 						item
 					);
+				console.log(data);
 			}	else	{
 				FAIL('data for ' + item + ' came back empty');
 			}

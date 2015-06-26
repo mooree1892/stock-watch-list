@@ -49,6 +49,7 @@ function loadData(ticker) {
 			if(price){
 				// console.log(price[0])
 				// console.log(price[1])
+				console.log(price[0]);
 				console.log(price[0]-price[1]);
 				res((price[0]-price[1])/price[1]);
 			}
